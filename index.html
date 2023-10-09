@@ -12,7 +12,18 @@
         <input type="text" class="name" placeholder="Введите ваше имя" required>
         <input type="submit" value="Войти">
     </form>
-    
+    <div class="orderForm" >
+        <input type="text" class="address" placeholder="Адрес">
+        <input type="text" class="price" placeholder="Цена">
+        <input type="text" class="cost" placeholder="Стоимость">
+        <button type="button" onclick="createOrder()">Создать заказ</button>
+    </div>
+    <div class="actions-container">
+        <button class="action-button" onclick="showMessage('Заказ оплачен')">Оплатить</button>
+        <button class="action-button" onclick="showMessage('Заказ отправлен, ожидайте')">Отправить</button>
+        <button class="action-button" onclick="showMessage('Заказ принят')">Принять</button>
+        <button class="action-button" onclick="showMessage('Заказ завершен')">Завершить заказ</button>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ body {
     height: 100vh;
     margin: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #2a2a2a; 
@@ -49,6 +50,39 @@ body {
     color: #00ffcc; 
 }
 
+.orderForm {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00ffcc; 
+    width: 300px;
+    display: none;  
+}
+
+.orderForm input[type="text"],
+.orderForm button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 2px solid #00ffcc;
+    background-color: #333333;
+    color: #ffffff; 
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.orderForm button {
+    background-color: #00ffcc;
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.orderForm button:hover {
+    background-color: #1a1a1a;
+    color: #00ffcc; 
+}
 
 
 .popupMessage {
@@ -76,4 +110,30 @@ body {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
+}
+
+.actions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;  
+}
+
+
+.action-button {
+    padding: 10px 12px;
+    margin: 0 5px 5px 5px; 
+    border: 2px solid #00ffcc;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+}
+
+.action-button:hover {
+    background-color: #00ffcc;
+    color: #1a1a1a;
 }
