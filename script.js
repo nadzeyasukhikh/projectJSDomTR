@@ -8,6 +8,11 @@ const url = "https://jsonplaceholder.typicode.com/users"
 
 loginForm.addEventListener('submit', async function(event) {
     event.preventDefault();
+    handleLogin()
+})
+
+
+    async function handleLogin(){
 
     const emailValue = emailInput.value;
     const nameValue = nameInput.value;
@@ -24,7 +29,8 @@ loginForm.addEventListener('submit', async function(event) {
     } else {
         showMessage('Неверное имя пользователя или email.', 'red');
     }
-});
+
+};
 
 
 
