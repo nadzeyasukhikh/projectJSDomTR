@@ -23,21 +23,17 @@ loginForm.addEventListener('submit', async function(event) {
     const user = users.find(u => u.email === emailValue && u.name === nameValue);
 
     if (user) {
-        showMessage('Успешная авторизация!', 'green');
-        localStorage.setItem('userEmail', emailValue);
-        localStorage.setItem('userName', nameValue);
+        showMessage('Успешная авторизация!');
+        
     } else {
-        showMessage('Неверное имя пользователя или email.', 'red');
+        showMessage('Неверное имя пользователя или email.');
     }
 
 };
 
-
-
-
-function showMessage(text, color) {
+function showMessage(text) {
     messageDiv.textContent = text;
-    messageDiv.style.backgroundColor = color;
+   
     document.body.appendChild(messageDiv);
 
     setTimeout(() => {
