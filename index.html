@@ -19,10 +19,13 @@
         <button type="button" onclick="createOrder()">Создать заказ</button>
     </div>
     <div class="actions-container">
-        <button class="action-button" onclick="showMessage('Заказ оплачен')">Оплатить</button>
-        <button class="action-button" onclick="showMessage('Заказ отправлен, ожидайте')">Отправить</button>
-        <button class="action-button" onclick="showMessage('Заказ принят')">Принять</button>
-        <button class="action-button" onclick="showMessage('Заказ завершен')">Завершить заказ</button>
+        <button class="action-button" action="pay" onclick="showMessage('Заказ оплачен')">Оплатить</button>
+        <button class="action-button" action="send" onclick="showMessage('Заказ отправлен, ожидайте')">Отправить</button>
+        <button class="action-button" action="accept" onclick="showMessage('Заказ принят')">Принять</button>
+        <button class="action-button" action="complete" onclick="showMessage('Заказ завершен')">Завершить заказ</button>
+    </div>
+    <div class="exit-button">
+        <button class="exit-btn">Выход</button>
     </div>
     <script src="./script.js"></script>
 </body>

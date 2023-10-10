@@ -17,13 +17,14 @@ const usersFromLocalStorage = localStorage.getItem("users")
     ? JSON.parse(localStorage.getItem("users"))
     : [];
 
-   
+//    авторизация
 
 loginForm.addEventListener('submit', async function(event) {
     event.preventDefault();
     handleLogin()
 })
 
+// сравниваем с сервером
 
     async function handleLogin(){
 
@@ -49,26 +50,26 @@ loginForm.addEventListener('submit', async function(event) {
 
 };
 
+// это наш див для всплывающих сообщений,сюда же добавила грузилку
 
-function showMessage(text) {
-    messageDiv.textContent = text;
-   
+function showMessage(text, isLoader = false) {
+    if (isLoader) {
+        messageDiv.innerHTML = `<div class="ring">Loading
+        <span></span>
+      </div>`;
+    } else {
+        messageDiv.textContent = text;
+    }
     document.body.append(messageDiv);
-
-    setTimeout(() => {
-        messageDiv.remove();
-    }, 3000);
+    if (!isLoader) {
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 5000);
+    }
 }
 
-
-const actionsContainer = document.querySelector(".actions-container")
-
-
-
-const actionButtons = document.querySelectorAll('.action-button');
-actionButtons.forEach(button => button.style.display = 'none');
-
-
+// это наша форма заказа, здесь, после нажатия на "создать",
+// отправляется запрос и появляются кнопки ниже  (проверка в инпутах ниже)
 
 async function createOrder() {
     const orderData = {
@@ -88,11 +89,33 @@ const response = await fetch(urlPost, {
 if (response.status === 201) {
     showMessage('Заказ успешно создан!');
     actionButtons.forEach(button => button.style.display = 'flex');
+    exitBtn.style.display = "flex"
 } else {
     showMessage('Ошибка при создании заказа.');
 }
 }
 
+// здесь форма заказа для заполнения
+const actionsContainer = document.querySelector(".actions-container")
+
+const actionButtons = document.querySelectorAll('.action-button');
+actionButtons.forEach(button => button.style.display = 'none');
+const exitBtn = document.querySelector(".exit-btn")
+exitBtn.style.display = "none"
+
+// здесь наша кнопка выхода,отправляет на главную страницу
+exitBtn.addEventListener("click", () =>{
+    loginForm.style.display = "block";
+    orderForm.style.display = "none"
+    actionButtons.forEach(button => button.style.display = 'none');
+    exitBtn.style.display = "none"
+    emailInput.value = "";
+    nameInput.value = "";
+})
+
+
+
+// это валидация наших инпутов
 function englishInput(input) {
     if (!/^[a-zA-Z\s@]*$/.test(input.value)) {
         input.setCustomValidity('Пожалуйста, используйте только английские буквы.');
@@ -101,9 +124,6 @@ function englishInput(input) {
         input.setCustomValidity(''); 
     }
 }
-
-
-
 
 
 function numerInput(input) {
@@ -130,4 +150,33 @@ costValue.addEventListener('input', function() {
 nameInput.addEventListener('input', function() {
     englishInput(this);
 });
+
+
+// здесь отсылается запрос по кнопкам 
+async function handleActionButtonClick(message) {
+    showMessage(null, true); 
+    
+        const response = await fetch(urlPost);
+        const data = await response.json();
+        // здесь меняем как хотим,я выбрала первый пост
+        const postData = `
+        ${message}
+         Title: ${data[0].title} 
+        Body: ${data[0].body}
+        `;
+        showMessage(postData);
+   
+}
+
+
+
+const actionPay = document.querySelector('.action-button[action="pay"]');
+const actionSend = document.querySelector('.action-button[action="send"]');
+const actionAccept = document.querySelector('.action-button[action="accept"]');
+const actionComplete = document.querySelector('.action-button[action="complete"]');
+
+actionPay.addEventListener('click', () => handleActionButtonClick('Заказ оплачен'));
+actionSend.addEventListener('click', () => handleActionButtonClick('Заказ отправлен, ожидайте'));
+actionAccept.addEventListener('click', () => handleActionButtonClick('Заказ принят'));
+actionComplete.addEventListener('click', () => handleActionButtonClick('Заказ завершен'));
 
