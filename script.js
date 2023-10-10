@@ -43,6 +43,9 @@ loginForm.addEventListener('submit', async function(event) {
         localStorage.setItem("users", JSON.stringify(usersFromLocalStorage));
         loginForm.style.display = "none"
         orderForm.style.display = "block"
+        priceValue.value = "";
+        addressValue.value = "";
+        costValue.value = "";
         
     } else {
         showMessage('Неверное имя пользователя или email.');
@@ -93,6 +96,7 @@ if (response.status === 201) {
     showMessage('Заказ успешно создан!');
     actionButtons.forEach(button => button.style.display = 'flex');
     exitBtn.style.display = "flex"
+    
 } else {
     showMessage('Ошибка при создании заказа.');
 }
@@ -161,6 +165,7 @@ async function handleActionButtonClick(message) {
     
         const response = await fetch(urlPost);
         const data = await response.json();
+
         // здесь меняем как хотим,я выбрала первый пост
         const postData = `
         ${message}
