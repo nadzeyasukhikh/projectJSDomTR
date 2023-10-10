@@ -71,6 +71,9 @@ function showMessage(text, isLoader = false) {
 // это наша форма заказа, здесь, после нажатия на "создать",
 // отправляется запрос и появляются кнопки ниже  (проверка в инпутах ниже)
 
+const createBtn = document.querySelector(".createBtn");
+createBtn.addEventListener("click", createOrder);
+
 async function createOrder() {
     const orderData = {
         address: addressValue.value,
